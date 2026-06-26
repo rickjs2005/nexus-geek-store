@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #070B14;
+  color: #F5F7FA;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: url('/sword-cursor.svg') 4 4, auto;
+}
+
+/* Cursor de espada (dourada/vermelha) nos elementos clicáveis */
+a,
+button,
+[role='button'],
+summary,
+label[for] {
+  cursor: url('/sword-cursor-gold.svg') 4 4, pointer;
+}
+
+/* Em campos de texto, cursor normal para não atrapalhar a digitação */
+input,
+textarea,
+select {
+  cursor: auto;
+}
+
+/* Efeito de corte de espada ao clicar */
+.nx-slash {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  width: 110px;
+  height: 6px;
+  margin: -3px 0 0 -55px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #00C2FF, #ffffff, #6C3BFF, transparent);
+  filter: drop-shadow(0 0 8px #00C2FF);
+  transform: rotate(-45deg) scaleX(0.2);
+  animation: nx-slash 0.45s ease-out forwards;
+}
+@keyframes nx-slash {
+  0% {
+    opacity: 0;
+    transform: rotate(-45deg) scaleX(0.15);
+  }
+  35% {
+    opacity: 1;
+    transform: rotate(-45deg) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-45deg) scaleX(1.2);
+  }
+}
+
+/* ---- Scrollbar futurista ---- */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #070B14;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#6C3BFF, #00C2FF);
+  border-radius: 999px;
+}
+
+::selection {
+  background: rgba(0, 194, 255, 0.3);
+  color: #fff;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  /* Texto com gradiente neon */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(100deg, #6C3BFF 0%, #00C2FF 50%, #00FFB2 100%);
+  }
+
+  /* Tag / pílula HUD */
+  .hud-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-cyber-cyan/30 bg-cyber-cyan/5
+           px-4 py-1.5 font-tech text-xs uppercase tracking-[0.3em] text-cyber-cyan;
+  }
+
+  /* Botão neon principal */
+  .btn-neon {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl
+           border border-cyber-cyan/50 bg-cyber-cyan/10 px-7 py-3 font-tech text-sm font-semibold
+           uppercase tracking-[0.2em] text-white transition-all duration-300;
+  }
+  .btn-neon:hover {
+    @apply border-cyber-cyan bg-cyber-cyan/20 shadow-neon-cyan;
+    transform: translateY(-2px);
+  }
+
+  /* Botão de call-to-action (vermelho) */
+  .btn-cta {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-xl border border-cta/60
+           bg-cta/15 px-7 py-3 font-tech text-sm font-semibold uppercase tracking-[0.2em] text-white
+           transition-all duration-300;
+  }
+  .btn-cta:hover {
+    @apply border-cta bg-cta/25 shadow-neon-cta;
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/15
+           px-7 py-3 font-tech text-sm font-semibold uppercase tracking-[0.2em] text-white/80
+           transition-all duration-300 hover:border-white/40 hover:text-white;
+  }
+
+  /* Card de vidro */
+  .glass {
+    @apply border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+  }
+
+  .section-title {
+    @apply font-display text-4xl font-black leading-tight sm:text-5xl lg:text-6xl;
+  }
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Grade HUD de fundo */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(0, 194, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 194, 255, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 78%);
+}
+
+/* Brilho radial */
+.glow-blob {
+  filter: blur(80px);
+  border-radius: 999px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Scanline para vibe de monitor CRT/HUD */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Texto com efeito de borda neon */
+.neon-text {
+  text-shadow:
+    0 0 8px rgba(0, 194, 255, 0.6),
+    0 0 24px rgba(108, 59, 255, 0.45);
+}
+
+/* Card 3D tilt container */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Linha animada divisória */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(108, 59, 255, 0.7), rgba(0, 194, 255, 0.7), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
