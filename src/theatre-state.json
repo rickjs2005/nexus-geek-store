@@ -1,0 +1,49 @@
+{
+  "sheetsById": {
+    "Hero": {
+      "staticOverrides": { "byObject": {} },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 10,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Camera": {
+            "trackData": {
+              "track-z": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera:[\"z\"]",
+                "keyframes": [
+                  { "id": "kz0", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 6 },
+                  { "id": "kz1", "position": 10, "connectedRight": false, "handles": [0.42, 0, 0.58, 1], "type": "bezier", "value": 1.4 }
+                ]
+              },
+              "track-posY": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera:[\"posY\"]",
+                "keyframes": [
+                  { "id": "ky0", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 },
+                  { "id": "ky1", "position": 10, "connectedRight": false, "handles": [0.42, 0, 0.58, 1], "type": "bezier", "value": 0.35 }
+                ]
+              },
+              "track-fov": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera:[\"fov\"]",
+                "keyframes": [
+                  { "id": "kf0", "position": 0, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 45 },
+                  { "id": "kf1", "position": 10, "connectedRight": false, "handles": [0.42, 0, 0.58, 1], "type": "bezier", "value": 52 }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"z\"]": "track-z",
+              "[\"posY\"]": "track-posY",
+              "[\"fov\"]": "track-fov"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": []
+}

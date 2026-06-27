@@ -11,6 +11,7 @@ import {
 } from '@react-three/postprocessing'
 import { BlendFunction, Effect } from 'postprocessing'
 import * as THREE from 'three'
+import { heroSheet, camObj } from '../theatre'
 
 /* ----------------------------- Buraco negro ----------------------------- */
 const BH_VERT = /* glsl */ `
@@ -177,11 +178,23 @@ function Asteroids({ count = 38 }) {
   )
 }
 
-/* ----------------------- Câmera com parallax suave ---------------------- */
-function Rig() {
+/* ----------- Câmera dirigida pela timeline do Theatre.js (scroll) -------- */
+const SEQ_LEN = 10
+function CameraSequence() {
   useFrame((s) => {
-    s.camera.position.x += (s.pointer.x * 0.5 - s.camera.position.x) * 0.03
-    s.camera.position.y += (s.pointer.y * 0.3 + 0.0 - s.camera.position.y) * 0.03
+    // scroll do hero -> posição na sequência do Theatre (scrub)
+    const t = Math.min(Math.max(window.scrollY / window.innerHeight, 0), 1)
+    heroSheet.sequence.position = t * SEQ_LEN
+    const v = camObj.value // valor keyframado da câmera nesse ponto
+
+    // aplica a câmera do Theatre + parallax suave do mouse
+    s.camera.position.z += (v.z - s.camera.position.z) * 0.1
+    s.camera.position.x += (s.pointer.x * 0.5 - s.camera.position.x) * 0.04
+    s.camera.position.y += (v.posY + s.pointer.y * 0.3 - s.camera.position.y) * 0.06
+    if (Math.abs(s.camera.fov - v.fov) > 0.01) {
+      s.camera.fov = v.fov
+      s.camera.updateProjectionMatrix()
+    }
     s.camera.lookAt(0, 0, -4)
   })
   return null
@@ -245,7 +258,7 @@ export default function BlackHoleScene() {
       <Asteroids />
       <Sparkles count={80} scale={[16, 9, 6]} size={1.4} speed={0.25} opacity={0.5} color="#cfe0ff" />
 
-      <Rig />
+      <CameraSequence />
 
       <EffectComposer multisampling={2}>
         <Lensing />
