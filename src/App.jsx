@@ -49,9 +49,8 @@ export default function App() {
         className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-gradient-to-r from-cyber-cyan via-cyber-violet to-cyber-pink"
       />
 
-      {/* fundo fixo: partículas + grade HUD */}
+      {/* fundo fixo: poeira cósmica cinematográfica (sem HUD/grade) */}
       <ParticleBackground />
-      <div className="grid-overlay pointer-events-none fixed inset-0 z-0" />
 
       {/* glow do cursor (só visível em telas com mouse) */}
       <div

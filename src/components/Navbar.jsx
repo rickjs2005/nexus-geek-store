@@ -37,9 +37,20 @@ export default function Navbar({ sound }) {
           onClick={sound.click}
           className="group flex items-center gap-2.5"
         >
-          <span className="grid h-9 w-9 place-items-center rounded-lg border border-cyber-cyan/40 bg-cyber-cyan/10 font-display text-lg font-black text-cyber-cyan shadow-neon-cyan">
+          <motion.span
+            animate={{
+              scale: [1, 1.12, 1],
+              boxShadow: [
+                '0 0 0px rgba(0,194,255,0.0)',
+                '0 0 18px 2px rgba(0,194,255,0.85)',
+                '0 0 0px rgba(0,194,255,0.0)',
+              ],
+            }}
+            transition={{ duration: 6, times: [0, 0.06, 0.16], repeat: Infinity, ease: 'easeOut' }}
+            className="grid h-9 w-9 place-items-center rounded-lg border border-cyber-cyan/40 bg-cyber-cyan/10 font-display text-lg font-black text-cyber-cyan shadow-neon-cyan"
+          >
             N
-          </span>
+          </motion.span>
           <span className="font-display text-xl font-black tracking-widest text-white">
             NE<span className="text-gradient">XUS</span>
           </span>

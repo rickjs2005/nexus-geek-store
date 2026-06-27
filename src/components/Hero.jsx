@@ -1,8 +1,36 @@
-import { Suspense, lazy } from 'react'
-import { motion } from 'framer-motion'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+
+// Conta de 0 até o número (preservando o sufixo: "240+", "4K"...). Valores sem
+// número (ex.: "∞") aparecem direto.
+function CountUp({ value }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const [display, setDisplay] = useState(value)
+
+  useEffect(() => {
+    const m = String(value).match(/^(\d+)(.*)$/)
+    if (!inView || !m) return
+    const target = parseInt(m[1], 10)
+    const suffix = m[2]
+    let raf
+    const start = performance.now()
+    const dur = 1300
+    const tick = (now) => {
+      const t = Math.min((now - start) / dur, 1)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setDisplay(Math.round(eased * target) + suffix)
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [inView, value])
+
+  return <span ref={ref}>{display}</span>
+}
 
 // Carrega o WebGL só quando precisa (evita travar o primeiro paint).
-const EnergyCore3D = lazy(() => import('./EnergyCore3D.jsx'))
+const BlackHoleScene = lazy(() => import('./BlackHoleScene.jsx'))
 
 const container = {
   hidden: {},
@@ -16,15 +44,10 @@ const item = {
 export default function Hero({ sound }) {
   return (
     <section id="top" className="relative min-h-[100svh] overflow-hidden">
-      {/* blobs de brilho */}
-      <div className="glow-blob absolute -left-32 top-10 h-96 w-96 bg-cyber-violet/40" />
-      <div className="glow-blob absolute right-0 top-1/3 h-[28rem] w-[28rem] bg-cyber-cyan/30" />
-      <div className="glow-blob absolute bottom-0 left-1/3 h-80 w-80 bg-cyber-pink/30" />
-
-      {/* núcleo 3D ao fundo */}
+      {/* buraco negro cinematográfico ao fundo */}
       <div className="absolute inset-0 z-0">
         <Suspense fallback={null}>
-          <EnergyCore3D />
+          <BlackHoleScene />
         </Suspense>
       </div>
 
@@ -55,9 +78,9 @@ export default function Hero({ sound }) {
           variants={item}
           className="mt-7 max-w-2xl text-base text-white/70 sm:text-lg"
         >
-          Super-heróis lendários, periféricos PC Master Race e tech gear do futuro.
-          Uma vitrine cinematográfica onde cada produto vira{' '}
-          <span className="text-white">espetáculo visual</span>.
+          Heróis, tecnologia e cultura geek num só lugar — com um design digno de um{' '}
+          <span className="text-white">blockbuster</span>. Coleções, setup gamer e tech gear
+          numa experiência visual cinematográfica.
         </motion.p>
 
         <motion.div variants={item} className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -80,7 +103,9 @@ export default function Hero({ sound }) {
             ['∞', 'RGB lifestyle'],
           ].map(([n, l]) => (
             <div key={l} className="text-center">
-              <div className="font-display text-3xl font-black text-white">{n}</div>
+              <div className="font-display text-3xl font-black text-white">
+                <CountUp value={n} />
+              </div>
               <div className="text-xs uppercase tracking-[0.25em] text-white/45">{l}</div>
             </div>
           ))}

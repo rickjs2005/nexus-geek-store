@@ -1,0 +1,20 @@
+Coloque aqui as IMAGENS DOS HERÓIS (proporção ~4:5, ex.: 800x1000).
+Os cards já estão cabeados: assim que o arquivo existir, a foto aparece;
+se faltar, o card volta automaticamente pra arte vetorial (sem imagem quebrada).
+
+Arquivos esperados (nomes exatos):
+  batman.jpg
+  superman.jpg
+  ironman.jpg
+  captain-america.jpg
+  spiderman.jpg
+  thor.jpg
+  hulk.jpg
+  flash.jpg
+  wonder-woman.jpg
+  black-panther.jpg
+  joker.jpg
+  homelander.jpg
+
+Pode usar .jpg OU .png — o card tenta os dois automaticamente (não precisa
+mexer em nada). Ex.: solte "batman.png" que ele acha do mesmo jeito.

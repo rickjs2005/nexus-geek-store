@@ -1,19 +1,18 @@
 import { useEffect, useRef } from 'react'
 
-// Campo de partículas + linhas de conexão estilo "rede neural / energia".
-// Canvas 2D puro: leve, sem dependências, roda em mobile.
+// Poeira cósmica cinematográfica: milhares de partículas minúsculas em várias
+// profundidades (parallax), deriva lenta e cintilação sutil. SEM linhas de
+// conexão, SEM grade — inspirado em fotografia espacial (Interestelar / Dune),
+// não em HUD futurista.
 export default function ParticleBackground() {
   const canvasRef = useRef(null)
-  const mouse = useRef({ x: -9999, y: -9999 })
+  const mouse = useRef({ x: 0.5, y: 0.5 })
 
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
-    let raf
-    let w, h, dpr
-    let particles = []
-
-    const COLORS = ['#6C3BFF', '#00C2FF', '#00FFB2', '#8b5cff']
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let raf, w, h, dpr, particles = [], t = 0
 
     const resize = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -22,94 +21,66 @@ export default function ParticleBackground() {
       canvas.style.width = window.innerWidth + 'px'
       canvas.style.height = window.innerHeight + 'px'
 
-      const count = Math.min(110, Math.floor((window.innerWidth * window.innerHeight) / 14000))
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.25 * dpr,
-        vy: (Math.random() - 0.5) * 0.25 * dpr,
-        r: (Math.random() * 1.6 + 0.4) * dpr,
-        c: COLORS[(Math.random() * COLORS.length) | 0],
-      }))
+      const count = Math.min(460, Math.floor((window.innerWidth * window.innerHeight) / 4200))
+      particles = Array.from({ length: count }, () => {
+        const depth = Math.random() // 0 = longe, 1 = perto da câmera
+        return {
+          x: Math.random() * w,
+          y: Math.random() * h,
+          z: depth,
+          r: (0.3 + depth * 1.3) * dpr,        // mais perto = maior
+          base: 0.05 + depth * 0.18,           // opacidade 5%–23%
+          drift: (0.015 + depth * 0.05) * dpr, // mais perto = deriva mais rápida
+          tw: Math.random() * Math.PI * 2,
+          twS: 0.4 + Math.random() * 1.2,
+          warm: Math.random() < 0.14,          // poucas estrelas quentes
+        }
+      })
     }
 
     const tick = () => {
+      t += reduce ? 0.003 : 0.016
       ctx.clearRect(0, 0, w, h)
-      const linkDist = 130 * dpr
-      const mx = mouse.current.x * dpr
-      const my = mouse.current.y * dpr
-
+      const px = mouse.current.x - 0.5
+      const py = mouse.current.y - 0.5
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
-        p.x += p.vx
-        p.y += p.vy
-        if (p.x < 0 || p.x > w) p.vx *= -1
-        if (p.y < 0 || p.y > h) p.vy *= -1
-
-        // leve atração ao cursor
-        const ddx = mx - p.x
-        const ddy = my - p.y
-        const md = Math.hypot(ddx, ddy)
-        if (md < 180 * dpr) {
-          p.x += (ddx / md) * 0.4
-          p.y += (ddy / md) * 0.4
-        }
-
+        p.y += p.drift
+        if (p.y > h + 4) p.y = -4
+        // parallax: camadas mais próximas deslocam mais com o mouse
+        const ox = px * p.z * 42 * dpr
+        const oy = py * p.z * 26 * dpr
+        const tw = 0.55 + 0.45 * Math.sin(t * p.twS + p.tw)
+        ctx.globalAlpha = p.base * tw
+        ctx.fillStyle = p.warm ? 'rgba(255,224,188,1)' : 'rgba(214,230,255,1)'
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = p.c
-        ctx.shadowBlur = 8 * dpr
-        ctx.shadowColor = p.c
+        ctx.arc(p.x + ox, p.y + oy, p.r, 0, Math.PI * 2)
         ctx.fill()
-        ctx.shadowBlur = 0
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const q = particles[j]
-          const dx = p.x - q.x
-          const dy = p.y - q.y
-          const dist = Math.hypot(dx, dy)
-          if (dist < linkDist) {
-            ctx.beginPath()
-            ctx.moveTo(p.x, p.y)
-            ctx.lineTo(q.x, q.y)
-            ctx.strokeStyle = p.c
-            ctx.globalAlpha = (1 - dist / linkDist) * 0.18
-            ctx.lineWidth = 0.6 * dpr
-            ctx.stroke()
-            ctx.globalAlpha = 1
-          }
-        }
       }
+      ctx.globalAlpha = 1
       raf = requestAnimationFrame(tick)
     }
 
     const onMove = (e) => {
-      mouse.current.x = e.clientX
-      mouse.current.y = e.clientY
-    }
-    const onLeave = () => {
-      mouse.current.x = -9999
-      mouse.current.y = -9999
+      mouse.current.x = e.clientX / window.innerWidth
+      mouse.current.y = e.clientY / window.innerHeight
     }
 
     resize()
     tick()
     window.addEventListener('resize', resize)
     window.addEventListener('mousemove', onMove)
-    window.addEventListener('mouseout', onLeave)
-
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
       window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('mouseout', onLeave)
     }
   }, [])
 
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-70"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full"
       aria-hidden="true"
     />
   )

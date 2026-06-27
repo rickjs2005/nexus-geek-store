@@ -1,0 +1,14 @@
+Coloque aqui as CAPAS DOS QUADRINHOS (proporção 3:4, ex.: 600x800).
+Os cards já estão cabeados: assim que o arquivo existir, a capa aparece;
+se faltar, o card volta automaticamente pra capa pop-art vetorial.
+
+Arquivos esperados (nomes exatos):
+  batman.jpg          (Batman: Noite Eterna)
+  spiderman.jpg       (Aranha: Multiverso)
+  liga-cosmica.jpg    (Liga Cósmica)
+  vingadores.jpg      (Guerra dos Vingadores)
+  coringa.jpg         (Coringa: Riso Mortal)
+  thor.jpg            (Thor: Trovão Eterno)
+
+Pode usar .jpg OU .png — o card tenta os dois automaticamente (não precisa
+mexer em nada). Ex.: solte "batman.png" que ele acha do mesmo jeito.

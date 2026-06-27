@@ -6,5 +6,7 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
+    // libera preview por túnel (ex.: Cloudflare) p/ testar/gravar no celular
+    allowedHosts: ['.trycloudflare.com'],
   },
 })

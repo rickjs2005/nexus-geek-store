@@ -1,9 +1,17 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Emblem } from './HeroVisual.jsx'
 
 // Capa de quadrinho estilo pop-art: halftone, starburst, emblema do herói,
 // faixa de título e selo de edição. 100% vetorial.
 export default function ComicCard({ item, index, sound }) {
+  const [coverOk, setCoverOk] = useState(true)
+  const [coverSrc, setCoverSrc] = useState(item.cover)
+  // tenta .jpg e cai pro .png antes de desistir (e voltar pro pop-art vetorial)
+  const handleCoverError = () => {
+    if (coverSrc && coverSrc.endsWith('.jpg')) setCoverSrc(coverSrc.replace(/\.jpg$/, '.png'))
+    else setCoverOk(false)
+  }
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -59,13 +67,24 @@ export default function ComicCard({ item, index, sound }) {
               </span>
             </div>
 
-            {/* emblema */}
+            {/* emblema (fallback procedural) */}
             <div
               className="absolute left-1/2 top-[40%] h-[46%] w-[64%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-110"
               style={{ filter: `drop-shadow(0 0 14px ${item.accent}cc)`, transform: 'translateZ(40px)' }}
             >
               <Emblem id={item.emblem} accent={item.accent} />
             </div>
+
+            {/* capa real (se houver) — cai no procedural acima se faltar/erro */}
+            {item.cover && coverOk && (
+              <img
+                src={coverSrc}
+                alt={item.title}
+                loading="lazy"
+                onError={handleCoverError}
+                className="absolute inset-0 z-[1] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            )}
 
             {/* selo de edição */}
             <div className="absolute left-3 top-12 z-10 grid h-12 w-12 place-items-center rounded-full border-2 border-white/70 bg-black/50 backdrop-blur">

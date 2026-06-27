@@ -7,6 +7,7 @@ import HeroVisual from './HeroVisual.jsx'
 export default function ProductCard({ item, index, sound }) {
   const ref = useRef(null)
   const [style, setStyle] = useState({ rx: 0, ry: 0, gx: 50, gy: 50, active: false })
+  const [photoFailed, setPhotoFailed] = useState(false)
 
   const handleMove = (e) => {
     const el = ref.current
@@ -57,8 +58,8 @@ export default function ProductCard({ item, index, sound }) {
             className="relative aspect-[4/5] overflow-hidden"
             style={{ transform: 'translateZ(40px)' }}
           >
-            {item.image ? (
-              <ProductPhoto item={item} />
+            {item.image && !photoFailed ? (
+              <ProductPhoto item={item} onError={() => setPhotoFailed(true)} />
             ) : item.emblem ? (
               <HeroVisual item={item} />
             ) : (
@@ -128,13 +129,20 @@ export default function ProductCard({ item, index, sound }) {
 
 // Foto real do produto com tratamento neon (tint do accent, gradiente inferior,
 // zoom no hover e scanlines) para integrar à estética cyberpunk.
-function ProductPhoto({ item }) {
+function ProductPhoto({ item, onError }) {
+  const [src, setSrc] = useState(item.image)
+  // tenta .jpg e cai pro .png antes de desistir (e voltar pro vetorial)
+  const handleError = () => {
+    if (src.endsWith('.jpg')) setSrc(src.replace(/\.jpg$/, '.png'))
+    else onError?.()
+  }
   return (
     <div className="absolute inset-0 bg-panel">
       <img
-        src={item.image}
+        src={src}
         alt={item.name}
         loading="lazy"
+        onError={handleError}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
       />
       {/* tint + gradiente para casar com o tema e dar contraste ao texto */}

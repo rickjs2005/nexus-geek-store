@@ -7,27 +7,27 @@
 // • Quadrinhos: capas pop-art vetoriais. • Séries: pôsteres com cenários reais (sem animes).
 
 export const heroes = [
-  { id: 'h1', name: 'Batman', tag: 'DARK KNIGHT', price: 'R$ 1.299', rarity: 'Estátua 1/6', emblem: 'bat', cape: true, accent: '#ffd400', accent2: '#6b6b6b', blurb: 'Estátua do Cavaleiro das Trevas com manto em tecido real e base Gotham iluminada.' },
-  { id: 'h2', name: 'Superman', tag: 'MAN OF STEEL', price: 'R$ 1.149', rarity: 'Premium', emblem: 'superman', cape: true, accent: '#2b6bff', accent2: '#ff2b2b', blurb: 'Figure do Homem de Aço em pose de voo, capa dinâmica e olhos com efeito de calor.' },
-  { id: 'h3', name: 'Homem de Ferro', tag: 'VINGADOR', price: 'R$ 1.899', rarity: 'Limitada', emblem: 'ironman', cape: false, accent: '#ffb000', accent2: '#e62b2b', blurb: 'Action figure die-cast da armadura Mark, reator Arc em LED e repulsores luminosos.' },
-  { id: 'h4', name: 'Capitão América', tag: '1º VINGADOR', price: 'R$ 999', rarity: 'Figure 1/6', emblem: 'cap', cape: false, accent: '#2b6bff', accent2: '#ff2b2b', blurb: 'Figura articulada do Sentinela da Liberdade com escudo de vibranium magnético.' },
-  { id: 'h5', name: 'Homem-Aranha', tag: 'AMIGÃO', price: 'R$ 899', rarity: 'Premium', emblem: 'spider', cape: false, accent: '#ff2b3b', accent2: '#2b6bff', blurb: 'Colecionável do Aranha em pose acrobática, teias em fio transparente e diorama urbano.' },
-  { id: 'h6', name: 'Thor', tag: 'DEUS DO TROVÃO', price: 'R$ 1.499', rarity: 'Estátua 1/6', emblem: 'thor', cape: true, accent: '#7fd4ff', accent2: '#b0b8c8', blurb: 'Estátua do Deus do Trovão com Mjolnir, capa esvoaçante e base com relâmpago RGB.' },
-  { id: 'h7', name: 'Hulk', tag: 'O GIGANTE', price: 'R$ 1.699', rarity: 'Limitada', emblem: 'hulk', cape: false, accent: '#4cd137', accent2: '#2e9b1f', blurb: 'Figure colossal do Gigante Esmeralda com músculos esculpidos e base de destroços.' },
-  { id: 'h8', name: 'Flash', tag: 'VELOCISTA', price: 'R$ 949', rarity: 'Premium', emblem: 'flash', cape: false, accent: '#ff2b2b', accent2: '#ffd400', blurb: 'Colecionável do Velocista Escarlate com efeito de raio em acrílico e pose de corrida.' },
-  { id: 'h9', name: 'Mulher-Maravilha', tag: 'AMAZONA', price: 'R$ 1.249', rarity: 'Estátua 1/6', emblem: 'wonderwoman', cape: false, accent: '#ffb000', accent2: '#e62b2b', blurb: 'Estátua da Princesa de Themyscira com Laço da Verdade luminoso e tiara metálica.' },
-  { id: 'h10', name: 'Pantera Negra', tag: 'REI DE WAKANDA', price: 'R$ 1.399', rarity: 'Limitada', emblem: 'panther', cape: true, accent: '#b026ff', accent2: '#7a3bff', blurb: 'Action figure do Rei de Wakanda com traje vibranium e efeito de energia cinética.' },
-  { id: 'h11', name: 'Coringa', tag: 'PRÍNCIPE DO CRIME', price: 'R$ 1.099', rarity: 'Premium', emblem: 'joker', cape: false, accent: '#2fae4e', accent2: '#9b59b6', blurb: 'Estátua do Príncipe Palhaço do Crime com cartas, sorriso icônico e base de Arkham.' },
-  { id: 'h12', name: 'Capitão Pátria', tag: 'O SUPREMO', price: 'R$ 1.599', rarity: 'Limitada', emblem: 'homelander', cape: true, accent: '#2b6bff', accent2: '#c8203a', blurb: 'Figure do herói mais poderoso (e perturbador) com capa em bandeira e visão laser RGB.' },
+  { id: 'h1', name: 'Batman', tag: 'DARK KNIGHT', price: 'R$ 1.299', rarity: 'Estátua 1/6', emblem: 'bat', image: '/heroes/batman.jpg', cape: true, accent: '#ffd400', accent2: '#6b6b6b', blurb: 'Estátua do Cavaleiro das Trevas com manto em tecido real e base Gotham iluminada.' },
+  { id: 'h2', name: 'Superman', tag: 'MAN OF STEEL', price: 'R$ 1.149', rarity: 'Premium', emblem: 'superman', image: '/heroes/superman.jpg', cape: true, accent: '#2b6bff', accent2: '#ff2b2b', blurb: 'Figure do Homem de Aço em pose de voo, capa dinâmica e olhos com efeito de calor.' },
+  { id: 'h3', name: 'Homem de Ferro', tag: 'VINGADOR', price: 'R$ 1.899', rarity: 'Limitada', emblem: 'ironman', image: '/heroes/ironman.jpg', cape: false, accent: '#ffb000', accent2: '#e62b2b', blurb: 'Action figure die-cast da armadura Mark, reator Arc em LED e repulsores luminosos.' },
+  { id: 'h4', name: 'Capitão América', tag: '1º VINGADOR', price: 'R$ 999', rarity: 'Figure 1/6', emblem: 'cap', image: '/heroes/captain-america.jpg', cape: false, accent: '#2b6bff', accent2: '#ff2b2b', blurb: 'Figura articulada do Sentinela da Liberdade com escudo de vibranium magnético.' },
+  { id: 'h5', name: 'Homem-Aranha', tag: 'AMIGÃO', price: 'R$ 899', rarity: 'Premium', emblem: 'spider', image: '/heroes/spiderman.jpg', cape: false, accent: '#ff2b3b', accent2: '#2b6bff', blurb: 'Colecionável do Aranha em pose acrobática, teias em fio transparente e diorama urbano.' },
+  { id: 'h6', name: 'Thor', tag: 'DEUS DO TROVÃO', price: 'R$ 1.499', rarity: 'Estátua 1/6', emblem: 'thor', image: '/heroes/thor.jpg', cape: true, accent: '#7fd4ff', accent2: '#b0b8c8', blurb: 'Estátua do Deus do Trovão com Mjolnir, capa esvoaçante e base com relâmpago RGB.' },
+  { id: 'h7', name: 'Hulk', tag: 'O GIGANTE', price: 'R$ 1.699', rarity: 'Limitada', emblem: 'hulk', image: '/heroes/hulk.jpg', cape: false, accent: '#4cd137', accent2: '#2e9b1f', blurb: 'Figure colossal do Gigante Esmeralda com músculos esculpidos e base de destroços.' },
+  { id: 'h8', name: 'Flash', tag: 'VELOCISTA', price: 'R$ 949', rarity: 'Premium', emblem: 'flash', image: '/heroes/flash.jpg', cape: false, accent: '#ff2b2b', accent2: '#ffd400', blurb: 'Colecionável do Velocista Escarlate com efeito de raio em acrílico e pose de corrida.' },
+  { id: 'h9', name: 'Mulher-Maravilha', tag: 'AMAZONA', price: 'R$ 1.249', rarity: 'Estátua 1/6', emblem: 'wonderwoman', image: '/heroes/wonder-woman.jpg', cape: false, accent: '#ffb000', accent2: '#e62b2b', blurb: 'Estátua da Princesa de Themyscira com Laço da Verdade luminoso e tiara metálica.' },
+  { id: 'h10', name: 'Pantera Negra', tag: 'REI DE WAKANDA', price: 'R$ 1.399', rarity: 'Limitada', emblem: 'panther', image: '/heroes/black-panther.jpg', cape: true, accent: '#b026ff', accent2: '#7a3bff', blurb: 'Action figure do Rei de Wakanda com traje vibranium e efeito de energia cinética.' },
+  { id: 'h11', name: 'Coringa', tag: 'PRÍNCIPE DO CRIME', price: 'R$ 1.099', rarity: 'Premium', emblem: 'joker', image: '/heroes/joker.jpg', cape: false, accent: '#2fae4e', accent2: '#9b59b6', blurb: 'Estátua do Príncipe Palhaço do Crime com cartas, sorriso icônico e base de Arkham.' },
+  { id: 'h12', name: 'Capitão Pátria', tag: 'O SUPREMO', price: 'R$ 1.599', rarity: 'Limitada', emblem: 'homelander', image: '/heroes/homelander.jpg', cape: true, accent: '#2b6bff', accent2: '#c8203a', blurb: 'Figure do herói mais poderoso (e perturbador) com capa em bandeira e visão laser RGB.' },
 ]
 
 export const comics = [
-  { id: 'c1', title: 'Batman: Noite Eterna', issue: '001', emblem: 'bat', price: 'R$ 49,90', accent: '#ffd400', accent2: '#6b6b6b', tagline: 'A escuridão tem um guardião.' },
-  { id: 'c2', title: 'Aranha: Multiverso', issue: '042', emblem: 'spider', price: 'R$ 39,90', accent: '#ff2b3b', accent2: '#2b6bff', tagline: 'Infinitas teias. Um destino.' },
-  { id: 'c3', title: 'Liga Cósmica', issue: '007', emblem: 'superman', price: 'R$ 54,90', accent: '#2b6bff', accent2: '#ff2b2b', tagline: 'Heróis unidos contra o vazio.' },
-  { id: 'c4', title: 'Guerra dos Vingadores', issue: '015', emblem: 'ironman', price: 'R$ 59,90', accent: '#ffb000', accent2: '#e62b2b', tagline: 'A armadura final desperta.' },
-  { id: 'c5', title: 'Coringa: Riso Mortal', issue: '003', emblem: 'joker', price: 'R$ 44,90', accent: '#2fae4e', accent2: '#9b59b6', tagline: 'O caos nunca foi tão divertido.' },
-  { id: 'c6', title: 'Thor: Trovão Eterno', issue: '028', emblem: 'thor', price: 'R$ 47,90', accent: '#7fd4ff', accent2: '#b0b8c8', tagline: 'O martelo decide quem é digno.' },
+  { id: 'c1', title: 'Batman: Noite Eterna', issue: '001', emblem: 'bat', cover: '/comics/batman.jpg', price: 'R$ 49,90', accent: '#ffd400', accent2: '#6b6b6b', tagline: 'A escuridão tem um guardião.' },
+  { id: 'c2', title: 'Aranha: Multiverso', issue: '042', emblem: 'spider', cover: '/comics/spiderman.jpg', price: 'R$ 39,90', accent: '#ff2b3b', accent2: '#2b6bff', tagline: 'Infinitas teias. Um destino.' },
+  { id: 'c3', title: 'Liga Cósmica', issue: '007', emblem: 'superman', cover: '/comics/liga-cosmica.jpg', price: 'R$ 54,90', accent: '#2b6bff', accent2: '#ff2b2b', tagline: 'Heróis unidos contra o vazio.' },
+  { id: 'c4', title: 'Guerra dos Vingadores', issue: '015', emblem: 'ironman', cover: '/comics/vingadores.jpg', price: 'R$ 59,90', accent: '#ffb000', accent2: '#e62b2b', tagline: 'A armadura final desperta.' },
+  { id: 'c5', title: 'Coringa: Riso Mortal', issue: '003', emblem: 'joker', cover: '/comics/coringa.jpg', price: 'R$ 44,90', accent: '#2fae4e', accent2: '#9b59b6', tagline: 'O caos nunca foi tão divertido.' },
+  { id: 'c6', title: 'Thor: Trovão Eterno', issue: '028', emblem: 'thor', cover: '/comics/thor.jpg', price: 'R$ 47,90', accent: '#7fd4ff', accent2: '#b0b8c8', tagline: 'O martelo decide quem é digno.' },
 ]
 
 export const series = [
