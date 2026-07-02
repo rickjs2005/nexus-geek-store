@@ -59,7 +59,7 @@ export const setup = [
   { id: 's1', name: 'Keychron K8 Pro', tag: 'TECLADO', price: 'R$ 899', spec: 'Hot-swap · RGB', image: '/img/kb.jpg', accent: '#6C3BFF', accent2: '#00C2FF', blurb: 'Mecânico sem fio, switches hot-swap, keycaps PBT e per-key RGB. Gasket mount premium.' },
   { id: 's2', name: 'Logitech G Pro X Superlight 2', tag: 'MOUSE', price: 'R$ 799', spec: '32K DPI · 60g', image: '/img/mouse.jpg', accent: '#00C2FF', accent2: '#6C3BFF', blurb: 'Sensor HERO 2 de 32.000 DPI, 60g e bateria de 95h. O favorito dos pros de FPS.' },
   { id: 's3', name: 'HyperX Cloud III', tag: 'HEADSET', price: 'R$ 649', spec: 'Surround 7.1', image: '/img/headset.jpg', accent: '#6C3BFF', accent2: '#00FFB2', blurb: 'Drivers angulados de 53mm, áudio espacial 7.1 e microfone com cancelamento de ruído.' },
-  { id: 's4', name: 'Samsung Odyssey G5 27"', tag: 'MONITOR', price: 'R$ 1.699', spec: '2K · 165Hz · 1ms', image: '/img/deskmat-a.jpg', accent: '#00FFB2', accent2: '#00C2FF', blurb: 'Painel curvo QHD 1000R, 165Hz, HDR10 e FreeSync. Imersão total na estação de batalha.' },
+  { id: 's4', name: 'Samsung Odyssey G5 27"', tag: 'MONITOR', price: 'R$ 1.699', spec: '2K · 165Hz · 1ms', image: '/img/monitor.jpg', accent: '#00FFB2', accent2: '#00C2FF', blurb: 'Painel curvo QHD 1000R, 165Hz, HDR10 e FreeSync. Imersão total na estação de batalha.' },
 ]
 
 export const gear = [
