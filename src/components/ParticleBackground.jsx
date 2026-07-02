@@ -15,13 +15,14 @@ export default function ParticleBackground() {
     let raf, w, h, dpr, particles = [], t = 0
 
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2)
+      // DPR 1: poeira desfocada não precisa de nitidez e o custo de fill é ~metade
+      dpr = 1
       w = canvas.width = window.innerWidth * dpr
       h = canvas.height = window.innerHeight * dpr
       canvas.style.width = window.innerWidth + 'px'
       canvas.style.height = window.innerHeight + 'px'
 
-      const count = Math.min(460, Math.floor((window.innerWidth * window.innerHeight) / 4200))
+      const count = Math.min(220, Math.floor((window.innerWidth * window.innerHeight) / 8000))
       particles = Array.from({ length: count }, () => {
         const depth = Math.random() // 0 = longe, 1 = perto da câmera
         return {

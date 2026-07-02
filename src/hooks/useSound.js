@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useEffect } from 'react'
+import { useCallback, useMemo, useRef, useState, useEffect } from 'react'
 
 // Sons de UI gerados proceduralmente via WebAudio — nenhum asset externo.
 // Toca um "bip" futurista leve em hover/click. Pode ser mutado.
@@ -50,5 +50,6 @@ export function useSound() {
     }
   }, [])
 
-  return { enabled, setEnabled, hover, click }
+  // identidade estável: sem isso, todo re-render do App propaga para todas as seções
+  return useMemo(() => ({ enabled, setEnabled, hover, click }), [enabled, hover, click])
 }

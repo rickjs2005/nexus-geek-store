@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Sparkles, Environment } from '@react-three/drei'
 import {
@@ -6,7 +6,6 @@ import {
   Bloom,
   Vignette,
   Noise,
-  ChromaticAberration,
   wrapEffect,
 } from '@react-three/postprocessing'
 import { BlendFunction, Effect } from 'postprocessing'
@@ -31,7 +30,7 @@ const BH_FRAG = /* glsl */ `
     vec2 u = f * f * (3.0 - 2.0 * f);
     return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
   }
-  float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<5;i++){ v+=a*noise(p); p=p*2.03+vec2(1.7,9.2); a*=0.5; } return v; }
+  float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<3;i++){ v+=a*noise(p); p=p*2.03+vec2(1.7,9.2); a*=0.5; } return v; }
   float starLayer(vec2 uv, float thr, float bright){
     vec2 g=floor(uv); float h=hash(g);
     if(h<thr) return 0.0;
@@ -40,7 +39,7 @@ const BH_FRAG = /* glsl */ `
     return core*bright*((h-thr)/(1.0-thr))*tw;
   }
   float starfield(vec2 uv){
-    return starLayer(uv*120.0,0.990,1.0)+starLayer(uv*55.0,0.996,2.4)+starLayer(uv*26.0,0.992,0.5);
+    return starLayer(uv*120.0,0.990,1.0)+starLayer(uv*55.0,0.996,2.4);
   }
 
   void main(){
@@ -239,10 +238,24 @@ function Lensing() {
 }
 
 export default function BlackHoleScene() {
+  // pausa o loop de render quando o hero sai da tela — sem isso a cena continua
+  // consumindo GPU durante a navegação pelo resto da página
+  const wrapRef = useRef(null)
+  const [visible, setVisible] = useState(true)
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting))
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
+    <div ref={wrapRef} className="h-full w-full">
     <Canvas
-      gl={{ antialias: true, powerPreference: 'high-performance' }}
-      dpr={[1, 1.6]}
+      frameloop={visible ? 'always' : 'never'}
+      gl={{ antialias: false, powerPreference: 'high-performance' }}
+      dpr={[0.75, 1]}
       camera={{ position: [0, 0, 6], fov: 45, near: 0.1, far: 100 }}
     >
       <color attach="background" args={['#04050b']} />
@@ -260,13 +273,13 @@ export default function BlackHoleScene() {
 
       <CameraSequence />
 
-      <EffectComposer multisampling={2}>
+      <EffectComposer multisampling={0}>
         <Lensing />
         <Bloom intensity={0.5} luminanceThreshold={0.52} luminanceSmoothing={0.3} mipmapBlur />
-        <ChromaticAberration blendFunction={BlendFunction.NORMAL} offset={[0.0008, 0.0008]} />
         <Vignette eskil={false} offset={0.28} darkness={0.8} />
         <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.45} />
       </EffectComposer>
     </Canvas>
+    </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import ParticleBackground from './components/ParticleBackground.jsx'
 import Navbar from './components/Navbar.jsx'
@@ -17,11 +17,15 @@ export default function App() {
   const sound = useSound()
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 })
-  const [cursor, setCursor] = useState({ x: -200, y: -200, down: false })
+  const glowRef = useRef(null)
 
-  // glow que segue o cursor (desktop)
+  // glow que segue o cursor (desktop) — atualiza o DOM direto, sem re-render
   useEffect(() => {
-    const onMove = (e) => setCursor((c) => ({ ...c, x: e.clientX, y: e.clientY }))
+    const onMove = (e) => {
+      if (glowRef.current) {
+        glowRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
+      }
+    }
     window.addEventListener('mousemove', onMove)
     return () => window.removeEventListener('mousemove', onMove)
   }, [])
@@ -54,10 +58,10 @@ export default function App() {
 
       {/* glow do cursor (só visível em telas com mouse) */}
       <div
-        className="pointer-events-none fixed z-0 hidden h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full md:block"
+        ref={glowRef}
+        className="pointer-events-none fixed left-0 top-0 z-0 hidden h-72 w-72 rounded-full md:block"
         style={{
-          left: cursor.x,
-          top: cursor.y,
+          transform: 'translate(-200px, -200px) translate(-50%, -50%)',
           background: 'radial-gradient(circle, rgba(108,59,255,0.12), transparent 60%)',
         }}
       />
