@@ -2,7 +2,7 @@
 
 Loja geek **conceitual e cinematográfica** focada em **impacto visual**. Sem backend, sem checkout real — é uma **vitrine interativa** estilo *Apple + Cyberpunk + Gaming Store*.
 
-> Tema: super-heróis genéricos (sem marcas registradas), PC Master Race / setup gamer e tech gear.
+> Tema: personagens de HQ e séries, PC Master Race / setup gamer e tech gear. Preços e produtos são ilustrativos; não há venda real.
 
 ---
 
@@ -74,7 +74,8 @@ O projeto é 100% estático. `npm run build` gera a pasta `dist/`, que pode ser 
 
 ## 📄 Licença
 
-Projeto conceitual para fins de portfólio/estudo. Sem marcas registradas no código — todo o conteúdo é genérico/placeholder.
+Projeto conceitual para fins de portfólio/estudo, sem venda real.
 
-- HDRI de iluminação em `public/hdri/` — **Poly Haven** (`dikhololo_night`), licença **CC0** (domínio público).
-- Imagens de personagens/capas que você adicionar em `public/heroes` e `public/comics` são de sua responsabilidade (podem ter direitos de marca).
+- O catálogo (`src/data/products.js`) cita personagens da DC, Marvel e The Boys e produtos de marcas como Logitech, Razer, HyperX, Samsung e Keychron. Esses nomes são marcas de terceiros e aparecem só como exemplo de vitrine.
+- As imagens de heróis e capas em `public/heroes` e `public/comics` foram criadas com geradores de imagem por IA e representam personagens protegidos por direitos de terceiros. Para uso comercial, substitua por material licenciado.
+- HDRI de iluminação em `public/hdri/`: **Poly Haven** (`dikhololo_night`), licença **CC0** (domínio público).
