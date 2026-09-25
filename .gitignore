@@ -8,3 +8,13 @@ npm-debug.log*
 
 # artefatos de demonstracao (videos gerados)
 *.mp4
+
+# env files (examples stay tracked)
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# image generation prompt notes (working notes, not part of the site)
+prompts-imagens.md
