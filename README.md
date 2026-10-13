@@ -1,81 +1,106 @@
-# NEXUS — Vitrine Geek Premium 🦾
+**English** | [Português](README.pt-BR.md)
 
-Loja geek **conceitual e cinematográfica** focada em **impacto visual**. Sem backend, sem checkout real — é uma **vitrine interativa** estilo *Apple + Cyberpunk + Gaming Store*.
+# NEXUS — Premium Geek Showcase
 
-> Tema: personagens de HQ e séries, PC Master Race / setup gamer e tech gear. Preços e produtos são ilustrativos; não há venda real.
+> **Type:** concept / fan-made — non-commercial portfolio showcase, **not affiliated** with Marvel, DC, The Boys or any other brand mentioned · **Demo:** https://nexus-geek-store.vercel.app
+
+![NEXUS hero with the 3D black hole](docs/screenshots/hero.webp)
+
+A **conceptual, cinematic geek store** focused on **visual impact**. No backend and no real checkout — it is an **interactive showcase** in an *Apple + Cyberpunk + Gaming Store* style. The UI is in Portuguese.
+
+> Theme: comic and TV characters, PC Master Race / gaming setup and tech gear. Prices and products are illustrative; nothing is actually sold.
 
 ---
 
-## ✨ Destaques visuais
+## Visual highlights
 
-- **Hero "buraco negro" cinematográfico (React Three Fiber)** — estilo *Interestelar/Gargantua*: disco de acreção **turbulento**, anel de fóton, **distorção gravitacional** (lente de Einstein via *postprocessing* custom), **planeta** com atmosfera + **asteroides** instanciados, poeira espacial e iluminação **HDRI**.
-- **Pós-processamento cinematográfico** (react-postprocessing): bloom, vinheta, aberração cromática e grão de filme.
-- **Poeira cósmica de fundo** com parallax em profundidade — sem grades/HUD (visual de fotografia espacial, não de interface).
-- **Cards 3D com tilt real** (parallax por mouse), glow dinâmico que segue o cursor e brilho holográfico.
-- **Imagens reais nos cards** de heróis e capas de quadrinho, com *fallback* automático pra arte vetorial.
-- **Scroll cinematográfico** com GSAP ScrollTrigger + reveals com Framer Motion.
-- **Microinterações**: botões com brilho/expansão, números que contam ao entrar na tela, logo com pulso.
-- **Som de UI procedural** (WebAudio, sem assets) — botão liga/desliga na navbar.
-- **Dark mode neon/RGB**, mobile-first e responsivo. **Easter egg Konami** escondido na página.
+- **Cinematic "black hole" hero (React Three Fiber)** — *Interstellar/Gargantua* style: turbulent accretion disk, photon ring, gravitational lensing (custom *postprocessing* effect), a **planet** with atmosphere, instanced **asteroids**, space dust and **HDRI** lighting.
+- **Cinematic post-processing** (react-postprocessing): bloom, vignette, chromatic aberration and film grain.
+- **Background cosmic dust** with depth parallax.
+- **3D tilt cards** (mouse parallax), cursor-following glow and holographic sheen.
+- **Card images** for heroes and comic covers (AI-generated), with automatic fallback to vector art.
+- **Cinematic scrolling** with GSAP ScrollTrigger, a Theatre.js camera timeline and Framer Motion reveals.
+- **Micro-interactions**: glowing/expanding buttons, count-up numbers, pulsing logo.
+- **Procedural UI sound** (WebAudio, no audio assets) with an on/off toggle in the navbar.
+- **Neon/RGB dark mode**, mobile-first and responsive. A hidden **Konami code easter egg** (the "secret coupon" it shows is just a joke; there is no checkout).
 
-## 🧱 Estrutura
+![Super Heroes Collection section](docs/screenshots/heroes-collection.webp)
+
+## Structure
 
 ```
 src/
 ├─ App.jsx                  # layout, scroll progress, cursor glow
-├─ main.jsx                 # bootstrap do React
-├─ index.css                # estilos base + utilitários Tailwind
-├─ hooks/useSound.js        # bips de UI via WebAudio
-├─ data/products.js         # catálogo placeholder
+├─ main.jsx                 # React bootstrap
+├─ index.css                # base styles + Tailwind utilities
+├─ hooks/useSound.js        # UI beeps via WebAudio
+├─ data/products.js         # placeholder catalog
+├─ theatre.js               # hero timeline (Theatre.js) + theatre-state.json
 └─ components/
-   ├─ ParticleBackground.jsx  # poeira cósmica (parallax em profundidade)
-   ├─ BlackHoleScene.jsx      # hero R3F: buraco negro + disco + lente grav. + planeta + asteroides + HDRI
-   ├─ Navbar.jsx              # nav fixa + menu mobile + toggle som
-   ├─ Hero.jsx                # landing cinematográfica
-   ├─ HeroVisual.jsx          # arte vetorial dos heróis no hero
+   ├─ ParticleBackground.jsx  # cosmic dust (depth parallax)
+   ├─ BlackHoleScene.jsx      # R3F hero: black hole + disk + lensing + planet + asteroids + HDRI
+   ├─ Navbar.jsx              # fixed nav + mobile menu + sound toggle
+   ├─ Hero.jsx                # cinematic landing
+   ├─ HeroVisual.jsx          # vector hero art
    ├─ HeroesCollection.jsx    # "Super Heroes Collection"
-   ├─ ComicsSection.jsx       # seção de quadrinhos
-   ├─ SeriesSection.jsx       # seção de séries
-   ├─ GamesSection.jsx        # seção de games (com filtros)
+   ├─ ComicsSection.jsx       # comics section
+   ├─ SeriesSection.jsx       # TV series section
+   ├─ GamesSection.jsx        # games section (with filters)
    ├─ GamingSetup.jsx         # "Gaming Setup & PC Master Race"
    ├─ TechGear.jsx            # "Tech Gear / Accessories"
    ├─ Section.jsx             # SectionHeading (GSAP) + Marquee
-   ├─ ProductCard.jsx         # card tilt 3D + foto real (fallback vetorial)
-   ├─ ComicCard.jsx           # capa real (fallback pop-art vetorial)
-   ├─ SeriesCard.jsx          # card de série
-   ├─ ScrollRow.jsx           # carrossel horizontal
-   ├─ KonamiEgg.jsx           # easter egg Konami
+   ├─ ProductCard.jsx         # 3D tilt card + photo (vector fallback)
+   ├─ ComicCard.jsx           # cover image (pop-art vector fallback)
+   ├─ SeriesCard.jsx          # series card
+   ├─ ScrollRow.jsx           # horizontal carousel
+   ├─ KonamiEgg.jsx           # Konami easter egg
    └─ Footer.jsx
 ```
 
-## 🚀 Rodando localmente
+## Running locally
 
-Pré-requisitos: **Node.js 18+** e **npm**.
+Prerequisites: **Node.js 18+** and **npm**.
 
 ```bash
-npm install
+npm ci
 npm run dev      # http://localhost:5173
-npm run build    # gera /dist
-npm run preview  # serve o build
+npm run build    # outputs /dist
+npm run preview  # serves the build
 ```
 
-Stack: **Vite + React 18 · Three.js · React Three Fiber + drei · react-postprocessing · GSAP (ScrollTrigger) · Framer Motion · Tailwind CSS · shaders GLSL**.
+Stack: **Vite 5 + React 18 · Three.js · React Three Fiber + drei · react-postprocessing · Theatre.js · GSAP (ScrollTrigger) · Framer Motion · Tailwind CSS 3 · GLSL shaders**.
 
-## 🛒 Catálogo
+There are no environment variables, automated tests or linter configured; the available check is `npm run build`.
 
-- **Setup & Gear**: produtos com modelos e preços de mercado BR (ilustrativos) e **fotos reais** em `public/img/` — teclado mecânico, mouse, headset, monitor, gabinete RGB, microfone de stream, mousepad XXL e cadeira gamer.
-- **Heróis e Quadrinhos**: aceitam **imagem real** (`public/heroes/<nome>.jpg|png` e `public/comics/<nome>.jpg|png`); se o arquivo não existir, o card cai automaticamente na **arte vetorial** (sem imagem quebrada). Veja os `LEIA-ME.txt` nessas pastas para os nomes esperados.
+## Catalog
 
-Para trocar um produto, edite `src/data/products.js`: ajuste `name`, `price`, `spec`, `blurb`, as cores `accent`/`accent2` e o caminho `image`/`cover` (omita para usar a arte procedural/vetorial).
+- **Setup & Gear**: products with illustrative Brazilian market models/prices and photos in `public/img/` — mechanical keyboard, mouse, headset, monitor, RGB case, streaming mic, XXL mousepad and gaming chair.
+- **Heroes and Comics**: accept an image (`public/heroes/<name>.jpg|png` and `public/comics/<name>.jpg|png`); if the file is missing, the card falls back to **vector art** (no broken image). See the `LEIA-ME.txt` files in those folders for the expected names.
 
-## 📦 Build & deploy
+To change a product, edit `src/data/products.js`: adjust `name`, `price`, `spec`, `blurb`, the `accent`/`accent2` colors and the `image`/`cover` path (omit it to use the procedural/vector art).
 
-O projeto é 100% estático. `npm run build` gera a pasta `dist/`, que pode ser publicada em qualquer host estático (Vercel, Netlify, GitHub Pages, Cloudflare Pages, etc.).
+## Build & deploy
 
-## 📄 Licença
+The project is fully static. `npm run build` generates `dist/`, which can be deployed to any static host (Vercel, Netlify, GitHub Pages, Cloudflare Pages, etc.).
 
-Projeto conceitual para fins de portfólio/estudo, sem venda real.
+## Limitations
 
-- O catálogo (`src/data/products.js`) cita personagens da DC, Marvel e The Boys e produtos de marcas como Logitech, Razer, HyperX, Samsung e Keychron. Esses nomes são marcas de terceiros e aparecem só como exemplo de vitrine.
-- As imagens de heróis e capas em `public/heroes` e `public/comics` foram criadas com geradores de imagem por IA e representam personagens protegidos por direitos de terceiros. Para uso comercial, substitua por material licenciado.
-- HDRI de iluminação em `public/hdri/`: **Poly Haven** (`dikhololo_night`), licença **CC0** (domínio público).
+- No real backend, login, cart or checkout — buttons such as "Entrar" and "Carrinho" are visual only.
+- The 3D scene is heavy (~1 MB chunk); performance may drop on weak GPUs.
+
+## Credits and rights
+
+**Fan-made** concept project for portfolio/study purposes, with no real sales and **no affiliation, sponsorship or endorsement** by any trademark owner.
+
+- The catalog (`src/data/products.js`) mentions DC, Marvel and The Boys characters and products from brands such as Logitech, Razer, HyperX, Samsung and Keychron. These names are third-party trademarks and appear only as showcase examples.
+- The hero and cover images in `public/heroes` and `public/comics` were created with AI image generators and depict characters whose rights belong to third parties. For any commercial use, replace them with licensed material.
+- Product and scenery photos in `public/img/`: origin not documented.
+- HDRI lighting in `public/hdri/`: **Poly Haven** (`dikhololo_night`), **CC0** license (public domain).
+
+## Security
+
+See [SECURITY.md](SECURITY.md).
+
+## License
+
+No license has been chosen yet; all rights reserved by the author. Third-party characters, names and trademarks belong to their respective owners.
