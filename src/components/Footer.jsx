@@ -15,7 +15,8 @@ export default function Footer({ sound }) {
             </div>
             <p className="mt-4 text-sm leading-relaxed text-white/50">
               A loja geek do futuro. Super-heróis, PC Master Race e tech gear numa vitrine
-              cinematográfica. Vitrine conceitual — sem marcas registradas.
+              cinematográfica. Vitrine conceitual fan-made, sem fins comerciais e sem venda real.
+              Personagens e marcas citados pertencem aos seus titulares; sem afiliação ou endosso.
             </p>
           </div>
 
